@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  rs_task:
+    container_name: rs_task
+    restart: "no"
+    user: "${APP_UID:-10001}:${APP_GID:-10001}"
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8001:80"
+    volumes:
+      - .:/app
+
+networks:
+  default:
+    name: rs_task
