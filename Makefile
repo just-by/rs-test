@@ -18,9 +18,9 @@ build: ## Build app image
 	docker-compose build rs_task
 
 fixtures: ## Load fixtures for dev environment
-	docker-compose run $(DC_RUN_ARGS) --no-deps rs_task php ./bin/console doctrine:fixtures:load -e dev
+	docker-compose run $(DC_RUN_ARGS) --no-deps rs_task php ./bin/console doctrine:fixtures:load -e dev --no-interaction
 
-init: build install ## Build && install dependencies
+init: build install fixtures ## Build && install dependencies
 
 test: ## Run tests
 	docker-compose run $(DC_RUN_ARGS) rs_task composer test
